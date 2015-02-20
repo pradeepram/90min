@@ -34,7 +34,7 @@
 					data:"{}",
                    dataType: "JSON",
 				 success: function(response){
-					debugger;					
+										
 					$('#posting').prepend($(response).fadeIn('slow'));
 					$("#watermark").val("What's your Next 90 min plan?");					 					   
 				}	,
@@ -58,12 +58,12 @@
 					data:"{}",
                    dataType: "JSON",
 				 success: function(response){
-					debugger;					
+										
 					$('#posting').prepend($(response).fadeIn('slow'));
 					$("#watermark").val("What's your Next 90 min plan?");					 					   
 				}	,
  error: function(XMLHttpRequest, textStatus, errorThrown) { 
- debugger;
+ 
                     alert("Status: " + textStatus); 
 					alert("Error: " + errorThrown); 
                 }  
@@ -115,12 +115,12 @@
                  
 						 dataType: "JSON",
 				 success: function(response){
-					debugger;
+					
 					$('#CommentPosted'+getpID).append($(response).fadeIn('slow'));
 					$("#commentMark-"+getpID).val("Write a comment...");		
 				}	,
  error: function(XMLHttpRequest, textStatus, errorThrown) { 
- debugger;
+ 
                     alert("Status: " + textStatus); 
 					alert("Error: " + errorThrown); 
                 }   				
@@ -143,13 +143,13 @@
                  
 						 dataType: "JSON",
 				 success: function(response){
-				 debugger;
+				 
 					$('#like-stats-'+getID).html(response);				
 				$('#like-panel-'+getID).html('<a href="javascript: void(0)" id="post_id'+getID+'" class="Unlike">Unlike</a>');				
 				$("#like-loader-"+getID).html('');
 				}	,
  error: function(XMLHttpRequest, textStatus, errorThrown) { 
- debugger;
+ 
                     alert("Status: " + textStatus); 
 					alert("Error: " + errorThrown); 
                 }   				
@@ -170,13 +170,13 @@
                  
 						 dataType: "JSON",
 				 success: function(response){
-				 debugger;
+				 
 					$('#like-stats-'+getID).html(response);				
 				$('#like-panel-'+getID).html('<a href="javascript: void(0)" id="post_id'+getID+'" class="LikeThis">Like</a>');				
 				$("#like-loader-"+getID).html('');
 				}	,
  error: function(XMLHttpRequest, textStatus, errorThrown) { 
- debugger;
+ 
                     alert("Status: " + textStatus); 
 					alert("Error: " + errorThrown); 
                 }   				
@@ -197,12 +197,12 @@
                  
 						 dataType: "JSON",
 				 success: function(response){
-					debugger;
+					
 					$('#bottomMoreButton').remove();
 				$('#posting').append($(response).fadeIn('slow'));
 				}	,
  error: function(XMLHttpRequest, textStatus, errorThrown) { 
- debugger;
+ 
                     alert("Status: " + textStatus); 
 					alert("Error: " + errorThrown); 
                 }   				
@@ -214,7 +214,7 @@
 		
 		//deleteComment
 		$('a.c_delete').livequery("click", function(e){
-			debugger;
+			
 			if(confirm('Are you sure you want to delete this comment?')==false)
 
 			return false;
@@ -235,7 +235,7 @@
 				},
 
 				success: function(response){
-debugger;
+
 					parent.fadeOut(200,function(){
 
 						parent.remove();
@@ -257,25 +257,25 @@ debugger;
 			$('a.delete').hide();	
 		});	
 		$('a.status').livequery("click", function(e){
-		if(confirm('status button')==false)
+		if(confirm('You completed task?')==false)
 		return false;
 		e.preventDefault();
 		var parent  = $('a.status').parent();
-		debugger;
+		
 		var temp    = parent.attr('id').replace('record-','');
-		alert(temp);
-		debugger;
+		
+		
 	$.ajax({
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
                     url: "http://192.168.0.70/www/Next90min/status.php?id="+temp,               
 						 dataType: "JSONP",
 				 success: function(response){
-				 debugger;
+				 
 		
 				}	,
  error: function(XMLHttpRequest, textStatus, errorThrown) { 
- debugger;
+ 
                     alert("Status: " + textStatus); 
 					alert("Error: " + errorThrown); 
                 }   				
@@ -291,7 +291,7 @@ debugger;
 
 		e.preventDefault();
 		var parent  = $('a.delete').parent();
-		debugger;
+		
 		var temp    = parent.attr('id').replace('record-','');
 		var main_tr = $('#'+temp).parent();
 			$.ajax({
@@ -300,11 +300,11 @@ debugger;
                     url: "http://192.168.0.70/www/Next90min/delete.php?id="+ parent.attr('id').replace('record-',''),
 			 dataType: "JSON",
 				success: function(response){
-debugger;
+
 					
 				},
 error: function(XMLHttpRequest, textStatus, errorThrown) { 
- debugger;
+ 
                     alert("Status: " + textStatus); 
 					alert("Error: " + errorThrown); 
                 }   				
@@ -332,7 +332,7 @@ error: function(XMLHttpRequest, textStatus, errorThrown) {
 		/// hover show undone button
 		// undone button
 				$('a.undone').livequery("click", function(e){
-		if(confirm('undone button')==false)
+		if(confirm('Please Complete!')==false)
 		return false;
 		e.preventDefault();
 		var parent  = $('a.undone').parent();
