@@ -29,7 +29,7 @@
 	$.ajax({
                     type: "Post",
                     contentType: "application/json; charset=utf-8",
-                    url: "http://localhost/www/Wallpost_Comment/posts.php?value1="+b,
+                    url: "http://192.168.0.70/www/Next90min/posts.php?value1="+b,
 					
 					data:"{}",
                    dataType: "JSON",
@@ -54,7 +54,7 @@
 			$.ajax({
                     type: "Post",
                     contentType: "application/json; charset=utf-8",
-                    url: "http://localhost/www/Wallpost_Comment/posts.php?value="+a,
+                    url: "http://192.168.0.70/www/Next90min/posts.php?value="+a,
 					
 					data:"{}",
                    dataType: "JSON",
@@ -112,7 +112,7 @@ return false;
 			$.ajax({
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
-                    url: "http://localhost/www/Wallpost_Comment/add_comment.php?comment_text="+comment_text+"&post_id="+getpID,
+                    url: "http://192.168.0.70/www/Next90min/add_comment.php?comment_text="+comment_text+"&post_id="+getpID,
                  
 						 dataType: "JSON",
 				 success: function(response){
@@ -181,7 +181,7 @@ return false;
 			$.ajax({
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
-                    url: "http://localhost/www/Wallpost_Comment/posts.php?show_more_post="+next,
+                    url: "http://192.168.0.70/www/Next90min/posts.php?show_more_post="+next,
                  
 						 dataType: "JSON",
 				 success: function(response){
@@ -216,7 +216,7 @@ return false;
 				 type: "GET",
                  contentType: "application/json; charset=utf-8",
 
-				url: 'http://localhost/www/Wallpost_Comment/delete_comment.php?c_id='+ c_id,
+				url: 'http://192.168.0.70/www/Next90min/delete_comment.php?c_id='+ c_id,
 
 				data: '',
 
@@ -266,7 +266,7 @@ return false;
 
 				type: 'get',
 
-				url: 'http://localhost/www/Wallpost_Comment/delete.php?id='+ parent.attr('id').replace('record-',''),
+				url: 'http://192.168.0.70/www/Next90min/delete.php?id='+ parent.attr('id').replace('record-',''),
 
 				data: '',
 
