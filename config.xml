@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.cas.Retail"
+        version   = "2.1.0">
+
+  <name>Service Management</name>
+  <description>
+    Retail service for WatchSquare
+  </description>
+  <author href="" email="selvaram@createalytics.com">
+    SelvaRam
+  </author>
+
+
+ <access origin="*" />
+  <!-- <access origin="http://serviceretail.createalytics.com" subdomains="true" />-->
+ 
+  <preference name="target-device"    value="universal" />
+  <preference name="fullscreen"       value="false" />  
+<preference name="show-splash-screen-spinner" value="true" />
+		<preference name="auto-hide-splash-screen" value="true" />
+<preference name="SplashScreenDelay" value="5000" />
+<gap:platform name="android" />
+
+
+  <icon src="themes/images/drawable-mdpi/mdpi.png"   gap:platform="android"    gap:density="mdpi" />
+  <icon src="themes/images/drawable-hdpi/hdpi.png"   gap:platform="android"    gap:density="hdpi" />
+  <icon src="themes/images/drawable-xhdpi/xhdpi.png"  gap:platform="android"    gap:density="xhdpi" />
+ <icon src="themes/images/drawable-xxhdpi/xxhdpi.png"  gap:platform="android"    gap:density="xxhdpi" />  
+  <icon src="themes/images/logo 64.png"          gap:platform="webos" />
+
+
+<gap:splash src="themes/images/splash/ldpi.png"       gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="themes/images/splash/mdpi.png"       gap:platform="android" gap:density="mdpi" />
+    <gap:splash src="themes/images/splash/hdpi.png"       gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="themes/images/splash/xhdpi.png"      gap:platform="android" gap:density="xhdpi" />
+<gap:splash src="themes/images/splash/xhdpi.png"      gap:platform="android" gap:density="xxhdpi" />
+
+
+</widget>

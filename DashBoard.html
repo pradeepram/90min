@@ -1,0 +1,101 @@
+<html>    
+    <head>        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Retail</title>
+        <link rel="stylesheet" href="themes/JobSheet1.min.css" />
+        <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" /> 
+        <link rel="stylesheet" href="Script/jquery.mobile.structure-1.4.5.min.css" />
+        <script src="Script/jquery-1.11.2.js" type="text/javascript"></script>
+        <script src="Script/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>        
+    
+		<script type="text/javascript" src="jquery.livequery.js"></script>
+        <script src="jquery.elastic.js" type="text/javascript" charset="utf-8"></script>
+<script src="jquery.watermarkinput.js" type="text/javascript"></script>
+<script src="js/jquery.min.js"></script>
+	
+    <script type="text/javascript">
+
+	// <![CDATA[	
+
+	$(document).ready(function(){	
+	debugger;	
+				$('#shareButton').click(function(e){            
+			var a = $("#watermark").val();			
+			if(a != "What's your Next 90 min plan?")
+			{
+			$('#shareButton').attr('disabled',true);
+			$.ajax({
+                    type: "Post",
+                    contentType: "application/json; charset=utf-8",
+                    url: "http://localhost/www/Wallpost_Comment/posts.php?value="+a,
+					
+					data:"{}",
+                   dataType: "JSON",
+				 success: function(response){
+					debugger;
+					
+					$('#posting').prepend($(response).fadeIn('slow'));
+					$("#watermark").val("What's your Next 90 min plan?");					 					   
+				}	,
+ error: function(XMLHttpRequest, textStatus, errorThrown) { 
+ debugger;
+                    alert("Status: " + textStatus); 
+					alert("Error: " + errorThrown); 
+                }  
+ 			});
+		
+		}	
+		}); 										
+	});	
+
+	// ]]>
+
+</script>
+    </head>
+    <body >
+        <div data-role="page" data-theme="a">
+            <div data-role="header" data-position="fixed">
+                <h1>DashBoard</h1>            
+            </div>
+            <div data-role="content" data-theme="a" >			
+                <form id="Login" method="POST" action="">
+                    <div>
+                        <textarea cols="40" rows="8" id="watermark" name="watermark"></textarea>
+					<table width="100%">
+                            <tr>
+                                <td style="width: 50%"></td> 
+						<td style="width: 50%;" ALIGN=right>
+                       <input data-inline="true"  style="align: right;" data-theme=a type="submit" data-icon="Action" name="post" id="shareButton" value="share" data-rel="external"></div>
+                       </td>
+					   </tr>
+					   <table>
+					   </div>
+                              <div>		
+							  <table width="100%">
+                            <tr>
+                                <td style="width: 3%">
+							  <img src="men.gif" alt="Smiley face" height="42" width="42">
+							  <br>
+							  <br></td> 
+							  <td style="width: 90%"> <label for="lblName" id="lblName">Afsal</label>
+							  <br>	 					
+							  <label for="lblMsg" id="lblMsg">session 1 90 min</label>
+							  </td> 
+
+</div>							  
+<div id="posting" align="center">
+	
+		<?php
+		include('dbcon.php');
+		
+		include_once('posts.php');?>
+		  
+		</div>
+                </form>
+            </div>
+            <div data-role="footer" data-position="fixed">
+                
+        </div>
+    </body>
+</html>
