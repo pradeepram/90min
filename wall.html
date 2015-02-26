@@ -24,6 +24,7 @@
 	// <![CDATA[	
 
 	$(document).ready(function(){	
+var userid=localStorage.getItem('userid1');
 
 	var b = "Test Sample";			
 	$.ajax({
@@ -34,7 +35,7 @@
 					data:"{}",
                    dataType: "JSON",
 				 success: function(response){
-										
+								debugger;		
 					$('#posting').prepend($(response).fadeIn('slow'));
 					$("#watermark").val("What's your Next 90 min plan?");					 					   
 				}	,
@@ -49,29 +50,26 @@
 			var a = $("#watermark").val();			
 			if(a != "What's your Next 90 min plan?")
 			{
-			$('#shareButton').attr('disabled',true);
+			$('#shareButton').attr('disabled',false);
 			$.ajax({
                     type: "Post",
                     contentType: "application/json; charset=utf-8",
-                    url: "http://192.168.0.70/www/Next90min/posts.php?value="+a,
+                    url: "http://192.168.0.70/www/Next90min/userid.php?value="+a+"&userid="+userid,
 					
 					data:"{}",
                    dataType: "JSON",
 				 success: function(response){
 										
-					$('#posting').prepend($(response).fadeIn('slow'));
-					$("#watermark").val("What's your Next 90 min plan?");					 					   
+					location.reload();			 					   
 				}	,
  error: function(XMLHttpRequest, textStatus, errorThrown) { 
- 
+	 location.reload();		
                     alert("Status: " + textStatus); 
 					alert("Error: " + errorThrown); 
                 }  
- 			});
-		
-		}
-	
-		}); 
+ 			});							
+		}	
+	}); 
 		
 		
 		
@@ -143,7 +141,7 @@
                  
 						 dataType: "JSON",
 				 success: function(response){
-				 
+				
 					$('#like-stats-'+getID).html(response);				
 				$('#like-panel-'+getID).html('<a href="javascript: void(0)" id="post_id'+getID+'" class="Unlike">Unlike</a>');				
 				$("#like-loader-"+getID).html('');
@@ -161,7 +159,7 @@
 		$('.Unlike').livequery("click",function(e){
 			
 			var getID   =  $(this).attr('id').replace('post_id','');
-			
+			debugger;
 			$("#like-loader-"+getID).html('<img src="loader.gif" alt="" />');
 			$.ajax({
                     type: "GET",
@@ -170,7 +168,7 @@
                  
 						 dataType: "JSON",
 				 success: function(response){
-				 
+				 debugger;
 					$('#like-stats-'+getID).html(response);				
 				$('#like-panel-'+getID).html('<a href="javascript: void(0)" id="post_id'+getID+'" class="LikeThis">Like</a>');				
 				$("#like-loader-"+getID).html('');
@@ -214,7 +212,7 @@
 		
 		//deleteComment
 		$('a.c_delete').livequery("click", function(e){
-			
+			debugger;
 			if(confirm('Are you sure you want to delete this comment?')==false)
 
 			return false;
@@ -235,7 +233,7 @@
 				},
 
 				success: function(response){
-
+debugger;
 					parent.fadeOut(200,function(){
 
 						parent.remove();
@@ -261,10 +259,9 @@
 		return false;
 		e.preventDefault();
 		var parent  = $('a.status').parent();
-		
-		var temp    = parent.attr('id').replace('record-','');
-		
-		
+		var temp   =  $(this).attr('id').replace('post_id','');
+		//var temp    = parent.attr('id').replace('record-','');					
+		debugger;
 	$.ajax({
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
@@ -285,22 +282,22 @@
 		});
 		/// hover show remove button
 		$('a.delete').livequery("click", function(e){
-
+debugger;
 		if(confirm('Are you sure you want to delete this post?')==false)
 		return false;
 
 		e.preventDefault();
 		var parent  = $('a.delete').parent();
+		var temp   =  $(this).attr('id').replace('post_id','');
 		
-		var temp    = parent.attr('id').replace('record-','');
-		var main_tr = $('#'+temp).parent();
+		debugger;
 			$.ajax({
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
-                    url: "http://192.168.0.70/www/Next90min/delete.php?id="+ parent.attr('id').replace('record-',''),
+                    url: "http://192.168.0.70/www/Next90min/delete.php?id="+ temp,
 			 dataType: "JSON",
 				success: function(response){
-
+	location.reload();
 					
 				},
 error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -336,15 +333,18 @@ error: function(XMLHttpRequest, textStatus, errorThrown) {
 		return false;
 		e.preventDefault();
 		var parent  = $('a.undone').parent();
-		var temp    = parent.attr('id').replace('record-','');
+		
+		var temp   =  $(this).attr('id').replace('post_id','');
+		debugger;
 		var main_tr1 = $('#'+temp).parent();
 			$.ajax({
 				 contentType: "application/json; charset=utf-8",
-                    url: "http://192.168.0.70/www/Next90min/undone.php?id="+ parent.attr('id').replace('record-',''),			
+                    url: "http://192.168.0.70/www/Next90min/undone.php?id="+temp,			
 						 dataType: "JSON",
 				beforeSend: function(){
 				},
-				success: function(){							
+				success: function(){		
+debugger;				
 				}
 			});	
 		});											
@@ -431,14 +431,14 @@ error: function(XMLHttpRequest, textStatus, errorThrown) {
                       <li>
                         <a href="#"><i class="glyphicon glyphicon-home"></i> Home</a>
                       </li>
-                      <li>
+                     <!-- <li>
                         <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Post</a>
-                      </li>
+                      </li>-->
                     <!--  <li>
                         <a href="#"><span class="badge">badge</span></a>
                       </li> -->
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
+                    <!--<ul class="nav navbar-nav navbar-right">
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
                         <ul class="dropdown-menu">
@@ -449,7 +449,7 @@ error: function(XMLHttpRequest, textStatus, errorThrown) {
                           <li><a href="">More</a></li>
                         </ul>
                       </li>
-                    </ul>
+                    </ul>-->
                   	</nav>
                 </div>
                 <!-- /top nav -->
