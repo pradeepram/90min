@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Login Form</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link href="css/style.css" rel="stylesheet">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="jquery-1.2.6.min.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>    
+		<script type="text/javascript">
+		$(document).ready(function(){	
+
+			$('#submit').click(function(e){        										
+				$('#submit').attr('disabled',false);
+				var b = $("#Username").val();		
+				var a = $("#Password").val();				
+			
+				$.ajax({
+		                type: "GET",
+		                contentType: "text/plain",
+		                url: "http://192.168.0.70/www/smarthosp_php/smarthosp/LoginScript.php?username="+b+"&pwd="+a,
+						data: "{}",
+		               dataType: "JSON",
+					 success: function(data){
+							
+					if (data.length >= 1) {
+						var array = [];
+			var uid=data[0].toString(); // result: a,b,c
+
+			var roleid=data[1].toString(); // result: a,b,c
+
+						
+			if(roleid==1)
+				{
+				var url = "PatientReg.html";
+				  $(location).attr('href', url);
+				}
+			else if(roleid==2){
+				var url = "DoctorScreen.html";
+				  $(location).attr('href', url);
+			}
+			else if(roleid==3){
+				var url = "PhysicianRecp.html";
+				  $(location).attr('href', url);
+			}
+			else if(roleid==4){
+				var url = "LabRecp.html";
+				  $(location).attr('href', url);
+			}
+			else if(roleid==7){
+				var url = "Dashboard.html";
+				  $(location).attr('href', url);
+			}
+			else
+				{
+				alert("Enter valid username and password")
+				}
+				
+					}
+					
+					},
+		error: function(XMLHttpRequest, textStatus, errorThrown) { 
+
+		              
+		            }
+			
+					});		
+				return false;
+			});
+			});
+		</script>
+	</head>
+	<body>
+<!--login modal-->
+<div class="container">
+<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#"> Smart Hospital</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+          
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+ <div class="jumbotron">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control input-lg" placeholder="UserName" id="Username">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control input-lg" placeholder="Password" id="Password">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-lg btn-block" name="submit" id="submit">Sign In</button>
+            </div>
+          </form>
+     
+</div> 
+</div>  
+
+
+
+	</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Hospital Management</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-select.css">
+<link rel="stylesheet" href="css/bootstrap-select.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> 
+				<script src="js/bootstrap-select.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+
+		<script type="text/javascript">
+$(document).ready(function(){	
+debugger;
+$.ajax({
+    type: "GET",
+    contentType: "text/plain",
+    url: "http://192.168.0.70/www/smarthosp_php/smarthosp/roles.php",
+    data: "{}",
+    dataType: "JSON",
+    success: function(data) {
+       debugger;
+       var list = data;
+       //get your combobox
+       var $select = $('#Roles').val(); 
+       var array = [];
+       array=data.rolename;  
+       array=data.roleid;  
+       //check if it contains some items
+       if (data.roleid.length > 0) {
+    	   debugger;
+       	$.each(data.rolename, function(val, text) {
+               $("#Roles").append($("<option></option>").html(text));
+             
+       	});
+    	
+       }         
+    },
+    error: function(Result) {
+   	 debugger;
+   	 
+    }
+});
+$('#submit').click(function(e){     
+
+			$('#submit').attr('disabled',false);
+			debugger;
+			var email = $("#inputEmail").val();	
+			
+			var uname = $("#UserName").val();	
+			var password = $("#inputPassword").val();	
+			var fname = $("#firstName").val();					
+			var phone = $("#phoneNumber").val();						
+			var gender = $('input[type="radio"]:checked').val();	
+			var role = $('#Roles option:selected').text();	
+			var userid=1;
+			$.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    url: "http://192.168.0.70/www/smarthosp_php/smarthosp/user_registration.php?email="+email+"&pwd="+password+"&fname="+fname+"&phone="+phone+"&gen="+gender+"&username="+uname+"&role="+role,
+					data: "{}",
+                   dataType: "JSON",
+				 success: function(data){
+				debugger;		
+				alert("The response is [" + data + "]"); 
+				 var url = "Login.html";
+				  $(location).attr('href', url);
+				}	,
+ error: function(XMLHttpRequest, textStatus, errorThrown) { 
+ debugger;
+                  	 var url = "Login.html";
+				  $(location).attr('href', url);
+                }
+				
+ 			});	
+			 location.reload();
+debugger;			
+		}); 
+		
+});
+</script>    
+<style type="text/css">
+    h1{
+        margin: 30px 0;
+        padding: 0 200px 15px 0;
+        border-bottom: 1px solid #E5E5E5;
+    }
+	.bs-example{
+    	margin: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+
+            <a class="navbar-brand" href="#"> Smart Hospital</a>
+          </div>
+ 
+        </div><!--/.container-fluid -->
+      </nav>
+<div class="jumbotron">
+    <h2>User Registration</h2>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="inputEmail">Email:</label>
+            <div class="col-xs-9">
+                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="inputUserName">UserName:</label>
+            <div class="col-xs-9">
+                <input type="text" class="form-control" id="UserName" placeholder="UserName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="inputPassword">Password:</label>
+            <div class="col-xs-9">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="confirmPassword">Confirm Password:</label>
+            <div class="col-xs-9">
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+            </div>
+        </div> 
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="firstName">First Name:</label>
+            <div class="col-xs-9">
+                <input type="text" class="form-control" id="firstName" placeholder="First Name">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="phoneNumber">Phone:</label>
+            <div class="col-xs-9">
+                <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number">
+            </div>
+        </div>
+     
+		<!-- <div class="form-group">
+            <label class="control-label col-xs-3" for="postalAddress">Address:</label>
+            <div class="col-xs-9">
+                <textarea rows="3" class="form-control" id="postalAddress" placeholder="Postal Address"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="ZipCode">Zip Code:</label>
+            <div class="col-xs-9">
+                <input type="text" class="form-control" id="ZipCode" placeholder="Zip Code">
+            </div>
+        </div> -->
+        <div class="form-group">
+            <label class="control-label col-xs-3">Gender:</label>
+            <div class="col-xs-2">
+                <label class="radio-inline">
+                    <input type="radio" name="genderRadios" value="male"> Male
+                </label>
+            </div>
+            <div class="col-xs-2">
+                <label class="radio-inline">
+                    <input type="radio" name="genderRadios" value="female"> Female
+                </label>
+            </div>
+        </div>
+        
+		<!-- <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-9">
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="news"> Send me latest news and updates.
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-9">
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="agree">  I agree to the <a href="#">Terms and Conditions</a>.
+                </label>
+            </div>
+        </div> -->
+        <br> 
+        <div class="form-group">
+		    <label class="control-label col-xs-3" for="phoneNumber">Assign Role:</label>
+            <div class="col-xs-9">
+                				
+									<select id="Roles" style="
+									width:  100%;
+									height: 30px;
+									display: block;
+									">
+									</select>																
+            </div>          									
+		</div>
+        <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-9">
+               <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+               <!--  <input type="reset" class="btn btn-default" value="Reset"> -->
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+</body>
+</html>                                		

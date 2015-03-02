@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Hospital Management</title>
+ <link rel="stylesheet" href="css/datepicker.css">
+   
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+ <link rel="stylesheet" href="css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> 
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+            	var id=3;
+            	 $.ajax({
+                     type: "GET",
+                     contentType: "text/plain",
+                     url: "http://192.168.0.70/www/smarthosp_php/smarthosp/patient.php?id="+id,
+                     data: "{}",
+                     dataType: "JSON",
+                     success: function(data) {
+                        debugger;
+                        var list = data;
+                        //get your combobox
+                        var $select = $('#doctor').val(); 
+                        var array = [];
+                        array=data;                    	
+                        if (list.length > 0) {
+                        	$.each(array, function(val, text) {                        		
+                                $("#doctor").append($("<option></option>").html(text));   
+                                $("#doctor option[value='']").remove();
+                                $("#doctor")[0].selectedIndex = 0;
+                        	});                           
+                        }         
+                     },
+                     error: function(Result) {
+                    	 debugger;                    	 
+                     }
+                 });
+                $('#example1').datepicker({
+                    format: "dd/mm/yyyy"
+                });  
+                $('.dp').on('change', function () {
+        			$('.datepicker').hide();
+        			});
+                $('#submit').click(function(e){        										
+        			$('#submit').attr('disabled',false);
+        			debugger;
+        			var fname = $("#firstName").val();		
+        				
+        			var phone = $("#phoneNumber").val();	
+        			var dob = $("#example1").val();
+        			var patientid = $("#patientid").val();
+        			var doctor = $("#doctor").val()
+        		var userid=1;
+        			$.ajax({
+                            type: "GET",
+                            contentType: "application/json; charset=utf-8",
+                            url: "http://192.168.0.70/www/smarthosp_php/smarthosp/patient_reg.php?fname="+fname+"&ph="+phone+"&dob="+dob+"&userid="+userid+"&patent_id="+patientid+"&doctor="+doctor,
+        					data: "{}",
+                           dataType: "JSON",
+        				 success: function(data){
+        				debugger;		
+        				location.reload();
+        				}	,
+         error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        }	
+        			   
+        	            
+         			});		
+        			 location.reload();
+        		}); 
+            
+            });
+        </script>
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"> Smart Hospital</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="index.html">Log out</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+	  <div class="jumbotron">
+    <form>
+        <h3>Enter Patient Details</h3>
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+            <input type="text" class="form-control" placeholder="Patient Id" id="patientid">
+        </div>
+        <br>
+		<div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+            <input type="text" class="form-control" placeholder="Name" id="firstName">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+			<input type="number" class="form-control" placeholder="Mobile Number" id="phoneNumber">
+        </div>
+        <br>
+        <div class="input-group">
+           <!--  <span class="input-group-addon">$</span> -->
+            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+
+            <!-- <span class="input-group-addon">.00</span>-->
+            <div class="hero-unit">
+                <input  type="text" class="form-control dp" placeholder="Date of Birth"  id="example1">
+            </div>
+      
+        </div>
+        <br>
+         <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+			<div class="input-group" style="display:block">
+									<select id="doctor" style="
+									width:  100%;
+									height: 30px;
+									display: block;
+									text-shadow: 0px 1px 0px #FFF;
+									">
+									<option selected>Select Doctor</option>
+									</select>
+
+								</div>
+        </div>
+		<br>
+    <!--    <p><a class="btn btn-primary btn-lg" href="#" role="button" name="submit" id="submit">Submit</a></p> -->
+		<input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+
+
+    </form>
+	 </div>
+</div>
+</body>
+</html>                                		
